@@ -1,0 +1,12 @@
+### 100 Amazon Product reviews
+- binary classification (negative positive)
+- Dataset of reviews from amazon distantly labeled according to the count of stars added by the user. Original dataformat is the same just with different column labels.  dataset is also available on huggingface https://huggingface.co/datasets/amazon_polarity.
+- preprocessing steps:
+  - sampled down from 35m to 200k reviews.
+  - basic text cleaning
+- final size: `200.000`
+- Domain of the labels:
+  - `text`: The plain text containing a sentence (review).
+  - `label`: The binary label. `1=negative, 2=positive`.
+- Citation Identifier: `zhang_character-level_2015`
+- Title: `Character-level convolutional networks for text classification`

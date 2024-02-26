@@ -1,0 +1,11 @@
+### 88 HatespeechTwitter
+- multiclass classification
+- well cited dataset for hatespeech classification on twitter with finer-grained labels.
+- original dataformat: tweetId and label: normal,spam,abusive,hateful
+- Preprocessing steps: twitter text cleaning, discarding less than 20 lengthed sentences
+- Domain of labels:
+  - `text`: The plain text containing a sentence.
+  - `label`: The binary label. `0=normal,1=spam,2=abusive,3=hateful`.
+- final size: 51400
+- Citation Identifier: `founta_large_2018`
+- Title: `Large Scale Crowdsourcing and Characterization of Twitter Abusive Behavior`

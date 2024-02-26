@@ -1,0 +1,13 @@
+### 127_VaccineLies
+- This dataset consists of targets and reactions to the targets annotated with stance labels. Targets are carefully selected misinformation statements (which were verified as misinformation) and reactins are tweets reacting to these statements. All with regard to two vaccination topics: covid and hpv vaccines. Some reactions react to more statements eg: "Bill gates will kill us, I dont want vaccine to change my DNA" will have two classification labels: 1) wrt "Bill gates bad" target and 2) wrt "Vaccines alter DNA" target. We extract those two annotations as two seperate datapoints:
+  - `TARGET`:"Bill gates bad" `TEXT`:"Bill gates will kill us, I dont want vaccine to change my DNA" `LABEL`:"supports"
+  - `TARGET`:"Vaccines alter DNA" `TEXT`:"Bill gates will kill us, I dont want vaccine to change my DNA" `LABEL`:"supports"
+- preprocessing steps:
+  - Fetching the tweets
+  - cleaning, preserving hashtags
+- Domain of the labels:
+  - `target` : sentence (verified as an misinformation)
+  - `text` : sentence that represents the stance to the target
+  - `label` : label of the stance `{'No Stance':0,'Not Relevant':1,'Accept':2,'Reject':3}`
+- Title: `VaccineLies: A Natural Language Resource for Learning to Recognize Misinformation about the COVID-19 and HPV Vaccines`
+- Citation Identifier: `weinzierlVaccineLiesNaturalLanguage2022`
