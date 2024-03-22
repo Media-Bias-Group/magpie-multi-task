@@ -142,7 +142,7 @@ dataset_id_to_family = {
     892: TaskFamilies.HATE_SPEECH,
 }
 
-MAX_NUMBER_OF_STEPS = 1000
+MAX_NUMBER_OF_STEPS = 500
 
 # Task-configs
 MAX_LENGTH = 128
