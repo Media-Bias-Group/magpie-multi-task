@@ -20,8 +20,8 @@ for t in tasks:
         st.process()
 
 config = {
-    "sub_batch_size": 3,
-    "eval_batch_size": 4,
+    "sub_batch_size": 32,
+    "eval_batch_size": 128,
     "initial_lr": 4e-5,
     "dropout_prob": 0.1,
     "hidden_dimension": 768,
