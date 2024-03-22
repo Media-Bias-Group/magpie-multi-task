@@ -15,7 +15,7 @@ from training.data.subtask import (
     RegressionSubTask,
     SubTask,
 )
-from training.model.loss import KLregular,CrossEntropySoft
+from training.model.loss import KLregular,CrossEntropySoft, KLinverse
 from training.model.optimization.grads_wrapper import GradsWrapper
 from training.tokenizer import tokenizer
 
@@ -103,7 +103,7 @@ class SoftClassificationHead(GradsWrapper):
         self.metrics = {
             "CEsoft": CrossEntropySoft()
         }
-        self.loss = KLregular()
+        self.loss = KLinverse()#KLregular()
 
     def forward(self, X, y):
         """Feed the data through head accordingly to RoBERTa approach and compute loss."""
