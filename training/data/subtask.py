@@ -218,6 +218,47 @@ class ClassificationSubTask(SubTask):
         return 1 / np.log(self.num_classes)
 
 
+
+class SoftClassificationSubTask(SubTask):
+    """A ClassificationSubTask."""
+
+    def __init__(self, num_classes=2, *args, **kwargs):
+        """Initialize a ClassificationSubTask."""
+        super(ClassificationSubTask, self).__init__(num_classes=num_classes, *args, **kwargs)
+        self.num_classes = num_classes
+
+    def load_data(self) -> Tuple[torch.LongTensor, torch.LongTensor, torch.LongTensor]:
+        """Load the data of a ClassificationSubTask."""
+        df = pd.read_csv(self.filename)
+
+        X, Y = df[self.src_col], df[self.tgt_cols_list]
+        tokenized_inputs = tokenizer(X.to_list(), padding="max_length", truncation=True, max_length=MAX_LENGTH)
+        X = tokenized_inputs.get("input_ids")
+        attention_masks = tokenized_inputs.get("attention_mask")
+        # assert Y.nunique().squeeze() == self.num_classes
+        # assert Y[self.tgt_cols_list[0]].min(axis=0) == 0
+        if self.num_classes == 2:  # if it's binary classification
+            Y = Y.to_numpy()
+        else:
+            Y = Y[self.tgt_cols_list].to_numpy()
+        return torch.LongTensor(X), torch.LongTensor(Y), torch.LongTensor(attention_masks)
+
+    def __repr__(self):
+        """Represent a Classification Subtask."""
+        return f"{'Multi-class' if self.num_classes != 2 else 'Binary'} Classification"
+
+    def create_class_weights(self):
+        """Compute the weights."""
+        self.class_weights = get_class_weights(self.Y[Split.TRAIN], method="isns")
+
+    def get_scaling_weight(self):
+        """Get the weight of a Classification Subtask.
+
+        As with the other tasks, we normalize by the natural logarithm of the domain size.
+        """
+        return 1 / np.log(self.num_classes)
+
+
 class RegressionSubTask(SubTask):
     """A RegressionSubTask."""
 
