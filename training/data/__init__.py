@@ -194,7 +194,7 @@ st_1_gwsd_128 = ClassificationSubTask(task_id=128, num_classes=3, filename="128_
 
 
 st_1_babe_sh_129 = ClassificationSubTask(task_id = 129, id=12901, filename = "129_BABE_SH/preprocessed.csv",num_classes=2)
-st_2_babe_sh_129 = SoftClassificationSubTask(task_id = 129, id=12902, filename = "129_BABE_SH/preprocessed.csv",num_classes=2,tgt_cols_list=['soft_label'])
+st_2_babe_sh_129 = SoftClassificationSubTask(task_id = 129, id=12902, filename = "129_BABE_SH/preprocessed.csv",tgt_cols_list=['soft_neutral','soft_bias'])
 
 # Tasks
 

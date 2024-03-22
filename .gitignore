@@ -1,0 +1,24 @@
+/.ignore-me
+
+.idea/inspectionProfiles/
+
+.idea/
+
+__pycache__/
+
+local.env
+/debug.py
+
+/data/*
+/model_files/*
+/logging/*
+
+debug_model.py
+.vscode/launch.json
+
+# wandb
+wandb
+
+outputs/
+
+test.csv

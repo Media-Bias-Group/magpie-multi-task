@@ -26,7 +26,6 @@ class CrossEntropySoft(nn.Module):
         super().__init__()
 
     def forward(self, Q_pred, P_targ):
-        Q_pred = F.softmax(Q_pred, dim=1)
         return torch.mean(-torch.sum(P_targ * torch.log2(Q_pred), dim=1))
         # return -torch.sum(P_targ * torch.log2(Q_pred))
 

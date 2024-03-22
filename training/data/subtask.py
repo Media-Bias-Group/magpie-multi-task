@@ -224,7 +224,7 @@ class SoftClassificationSubTask(SubTask):
 
     def __init__(self, num_classes=2, *args, **kwargs):
         """Initialize a ClassificationSubTask."""
-        super(ClassificationSubTask, self).__init__(num_classes=num_classes, *args, **kwargs)
+        super(SoftClassificationSubTask, self).__init__(num_classes=num_classes, *args, **kwargs)
         self.num_classes = num_classes
 
     def load_data(self) -> Tuple[torch.LongTensor, torch.LongTensor, torch.LongTensor]:
@@ -237,11 +237,9 @@ class SoftClassificationSubTask(SubTask):
         attention_masks = tokenized_inputs.get("attention_mask")
         # assert Y.nunique().squeeze() == self.num_classes
         # assert Y[self.tgt_cols_list[0]].min(axis=0) == 0
-        if self.num_classes == 2:  # if it's binary classification
-            Y = Y.to_numpy()
-        else:
-            Y = Y[self.tgt_cols_list].to_numpy()
-        return torch.LongTensor(X), torch.LongTensor(Y), torch.LongTensor(attention_masks)
+
+        Y = Y[self.tgt_cols_list].to_numpy()
+        return torch.LongTensor(X), torch.Tensor(Y), torch.LongTensor(attention_masks)
 
     def __repr__(self):
         """Represent a Classification Subtask."""

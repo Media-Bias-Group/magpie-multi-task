@@ -20,8 +20,8 @@ for t in tasks:
         st.process()
 
 config = {
-    "sub_batch_size": 32,
-    "eval_batch_size": 128,
+    "sub_batch_size": 3,
+    "eval_batch_size": 4,
     "initial_lr": 4e-5,
     "dropout_prob": 0.1,
     "hidden_dimension": 768,
@@ -30,7 +30,7 @@ config = {
     "early_stopping_mode": EarlyStoppingMode.HEADS,
     "loss_scaling": LossScaling.UNIFORM,
     "num_warmup_steps": 10,
-    "pretrained_path": "model_files/all_but_babe_pretrained.pth",
+    "pretrained_path": None,
     "resurrection": False,
     "model_name": "babe_SH",
     "head_specific_lr_dict": head_specific_lr,

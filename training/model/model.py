@@ -6,7 +6,7 @@ from torch import nn
 from transformers import AutoModel
 
 from enums.model_checkpoints import ModelCheckpoint
-from training.model.GradsWrapper import GradsWrapper
+from training.model.optimization.grads_wrapper import GradsWrapper
 from training.model.head import HeadFactory
 from training.tokenizer import tokenizer
 

@@ -3,6 +3,7 @@
 import torch
 from torch import nn
 from torch.nn import CrossEntropyLoss, MSELoss
+import torch.nn.functional as F
 from torchmetrics import Accuracy, F1Score, MeanSquaredError, Perplexity, R2Score
 
 from training.data.subtask import (
@@ -14,7 +15,7 @@ from training.data.subtask import (
     RegressionSubTask,
     SubTask,
 )
-from training.model.loss import KLregular
+from training.model.loss import KLregular,CrossEntropySoft
 from training.model.optimization.grads_wrapper import GradsWrapper
 from training.tokenizer import tokenizer
 
@@ -23,9 +24,9 @@ def HeadFactory(st: SubTask, *args, **kwargs):
     """Decide which head to use for the specific task type
        st: subtask"""
     if isinstance(st, ClassificationSubTask):
-        return SoftClassificationHead(num_classes=st.num_classes, class_weights=st.class_weights, *args, **kwargs)
-    if isinstance(st, SoftClassificationSubTask):
         return ClassificationHead(num_classes=st.num_classes, class_weights=st.class_weights, *args, **kwargs)
+    if isinstance(st, SoftClassificationSubTask):
+        return SoftClassificationHead(num_classes=st.num_classes, class_weights=st.class_weights, *args, **kwargs)
     elif isinstance(st, MultiLabelClassificationSubTask):
         return ClassificationHead(
             num_classes=st.num_classes, num_labels=st.num_labels, class_weights=st.class_weights, *args, **kwargs)
@@ -99,7 +100,9 @@ class SoftClassificationHead(GradsWrapper):
         self.out_proj = nn.Linear(hidden_dimension, num_classes * num_labels)
         self.num_classes = num_classes
         self.num_labels = num_labels
-
+        self.metrics = {
+            "CEsoft": CrossEntropySoft()
+        }
         self.loss = KLregular()
 
     def forward(self, X, y):
@@ -113,11 +116,12 @@ class SoftClassificationHead(GradsWrapper):
         x = self.dense(x)
         x = torch.tanh(x)
         x = self.dropout(x)
-        logits = self.out_proj(x)
+        logits = F.softmax(self.out_proj(x),dim=1)
 
-        loss = self.loss(logits.view(-1, self.num_classes), y.view(-1))
-        logits = logits.view(batch_size, self.num_classes, self.num_labels)  # reshape logits into prediction
-        return logits, loss, None
+        loss = self.loss(logits.view(-1, self.num_classes), y.view(-1, self.num_classes))
+        metrics_values = {k: metric(logits.cpu(), y.cpu()).detach() for k, metric in self.metrics.items()}
+
+        return logits, loss, metrics_values
 
 class TokenClassificationHead(GradsWrapper):
     """TokenClassificationHead inspired by one used in RoBERTa."""
