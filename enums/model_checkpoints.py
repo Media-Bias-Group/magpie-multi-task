@@ -10,3 +10,4 @@ class ModelCheckpoint(Enum):
     ROBERTA = "roberta-base"
     MUPPET = "facebook/muppet-roberta-base"
     ROBERTA_DUMMY = "roberta-dummy"
+    MAGPIE_PT = "mediabiasgroup/magpie-pt"
