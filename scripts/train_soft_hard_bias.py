@@ -34,7 +34,7 @@ config = {
     "num_warmup_steps": 10,
     "pretrained_path": None,
     "resurrection": False,
-    "model_name": "babe_SH",
+    "model_name": "babe_SH_baseline",
     "head_specific_lr_dict": head_specific_lr,
     "head_specific_patience_dict": head_specific_patience,
     "head_specific_max_epoch_dict": head_specific_max_epoch,
