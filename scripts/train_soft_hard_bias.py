@@ -40,7 +40,7 @@ config = {
 }
 
 
-set_random_seed()
+set_random_seed(7)
 wandb.init(project=EXPERIMENT_NAME, name="babe_SH")
 trainer = Trainer(task_list=tasks, LM=ModelCheckpoint.ROBERTA, **config)
 trainer.fit()
