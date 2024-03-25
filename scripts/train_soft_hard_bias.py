@@ -5,14 +5,16 @@ from enums.aggregation_method import AggregationMethod
 from enums.model_checkpoints import ModelCheckpoint
 from enums.scaling import LossScaling
 from enums.splits import Split
-from training.data import babe_sh_129
+# from training.data import babe_sh_129
+from training.data import st_1_babe_sh_129 as babe
 from training.data.task import Task
 from training.model.helper_classes import EarlyStoppingMode, Logger
 from training.trainer.trainer import Trainer
 from utils import set_random_seed
 
 EXPERIMENT_NAME = "train_soft_hard_babe"
-tasks = [babe_sh_129]
+# tasks = [babe_sh_129]
+tasks = [Task(task_id=babe.id, subtasks_list=[babe])]
 
 
 for t in tasks:
@@ -40,8 +42,8 @@ config = {
 }
 
 
-set_random_seed(7)
-wandb.init(project=EXPERIMENT_NAME, name="babe_SH")
+set_random_seed(8)
+wandb.init(project=EXPERIMENT_NAME, name="babe_SH_baseline")
 trainer = Trainer(task_list=tasks, LM=ModelCheckpoint.ROBERTA, **config)
 trainer.fit()
 trainer.eval(split=Split.TEST)
