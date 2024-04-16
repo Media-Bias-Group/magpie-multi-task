@@ -131,4 +131,8 @@ Running your own experiments can be done on multiple degrees of customization. Y
 # 3. Citation
 Please cite us as:
 ```
+@article{horychmagpie,
+  title={MAGPIE: Multi-Task Analysis of Media-Bias Generalization with Pre-Trained Identification of Expressions},
+  author={Horych, Tom{\'a}{\v{s}} and Wessel, Martin and Wahle, Jan Philip and Ruas, Terry and Wa{\ss}muth, Jerome and Greiner-Petter, Andr{\'e} and Aizawa, Akiko and Gipp, Bela and Spinde, Timo}
+}
 ```
