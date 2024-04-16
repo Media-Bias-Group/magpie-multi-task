@@ -131,4 +131,16 @@ Running your own experiments can be done on multiple degrees of customization. Y
 # 3. Citation
 Please cite us as:
 ```
+@inproceedings{Horych2024a,
+title = {MAGPIE: Multi-Task Analysis of Media-Bias Generalization with Pre-Trained Identification of Expressions},
+author = {Tomas Horych and Martin Wessel and Jan Philip Wahle and Terry Ruas and Jerome Wassmuth and Andre Greiner-Petter and Akiko Aizawa and Bela Gipp and Timo Spinde},
+url = {https://media-bias-research.org/wp-content/uploads/2024/04/Horych2024a.pdf},
+year = {2024},
+date = {2024-02-01},
+urldate = {2024-02-01},
+booktitle = {"Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation"},
+keywords = {nlp,bias},
+pubstate = {published},
+tppubtype = {inproceedings}
+}
 ```
